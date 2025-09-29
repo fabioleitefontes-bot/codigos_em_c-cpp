@@ -1,0 +1,114 @@
+/*
+	Name: magicSquare
+	Author: Fabio.Fonts 
+	Date: 01/09/25 08:50
+	Description: progama que carregue uma matriz e retorna se a matriz é mágica ou n
+*/
+ #include<windows.h>
+ #include<stdio.h>
+ #include<locale.h>
+ void imprimirMatriz(int[][3], int);
+ void squareMagic(int[][3], int, int);
+ main()
+ 	
+ {
+    setlocale(LC_ALL,"portuguese");
+    
+ 	int i, j, par; //indices da matriz
+	int mat[3][3];//matriz quadrada de ordem 3
+	puts("Digite os 9 elementos da matriz: ");
+	for(i = 0; i < 3; i++)
+		for(j = 0; j < 3; j++)
+			scanf("%d", &mat[i][j]);
+	puts("\nMatriz carregada!!!");
+	
+	printf("digite o valor esperado da soma"); scanf("%d", &par);
+	puts("matriz original\n");
+ 	imprimirMatriz(mat,3);
+ 	i=0;
+ 	j=0;
+ 		squareMagic(mat, 3, par);
+ 		
+ 	
+ 	
+ } //fim do progama
+ void imprimirMatriz(int M[][3], int ordem)
+{
+	int cont = 0;
+	for(int i =0; i < ordem; i++)
+	{
+	
+		for(int j =0; j<ordem; j++)
+			printf("[%d]\t", M[i][j] ); // \t da um tab na hora do print
+	puts("");	
+
+}
+}
+ void squareMagic(int M[][3], int ordem, int par)
+ {
+ 	int soma = 0;
+ 	int i =0;
+	int j = 0;
+	
+	for(int i = 0; i < 3; i++){
+		for(int j = 0; j<3; j++){
+		
+		soma = M[j][i] + soma;	}
+
+	if(soma != par){
+			printf("\nerro na linha [%d]", i+1);
+		break;	
+	
+		}
+	else{
+	soma = 0;
+	
+		continue;}
+	}
+		
+	soma =0;
+	
+	for(int j = 0; j < 3; j++){
+		for(int i = 0; i<3; i++){
+		
+		soma = M[j][i] + soma;	}
+
+	if(soma != par){
+			printf("\nerro na coluna [%d]", i+1);
+		break;	
+	
+		}
+	else{
+	soma = 0;
+
+		continue;}
+	
+
+}
+soma=0;
+for(int i =0; i<3; i++)
+{
+	soma = M[i][i] + soma;
+	 
+}
+if(soma!= 15)
+	printf("erro na diagonal secundaria");
+if(soma==15){
+soma=0;
+for (int i = 0; i < 3; i++) {
+        int j = 3 - 1 - i;
+        soma = M[i][j] + soma;
+
+}
+	if(soma != par)
+			printf("\nerro na diagonal secundaria");
+	else
+	printf("MATRIZ DE QUADRADO MÁGICO\n");}
+}
+
+ 
+ 	
+ 	
+ 	
+ 
+
