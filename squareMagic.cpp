@@ -2,31 +2,47 @@
 	Name: magicSquare
 	Author: Fabio.Fonts 
 	Date: 01/09/25 08:50
-	Description: progama que carregue uma matriz e retorna se a matriz È m·gica ou n
+	Description: progama que carregue uma matriz e retorna se a matriz √© m√°gica ou n
 */
  #include<windows.h>
  #include<stdio.h>
  #include<locale.h>
  void imprimirMatriz(int[][3], int);
  void squareMagic(int[][3], int, int);
+
  main()
- 	
  {
     setlocale(LC_ALL,"portuguese");
+    
+    //sess√£o para o objeto das cores
+   	 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    GetConsoleScreenBufferInfo(hConsole, &csbi);
+    WORD cor_original = csbi.wAttributes; 
+    
     int ordem = 3;
  	int i, j, par; //indices da matriz
 	int mat[3][3];//matriz quadrada de ordem 3
+		SetConsoleTextAttribute(hConsole, 15);
 	puts("Digite os 9 elementos da matriz: ");
+	   SetConsoleTextAttribute(hConsole, 7);
 	for(i = 0; i < 3; i++)
-		for(j = 0; j < 3; j++)
-			scanf("%d", &mat[i][j]);
-	puts("\nMatriz carregada!!!");
+		for(j = 0; j < 3; j++){
+		scanf("%d", &mat[i][j]);
+		}
+		SetConsoleTextAttribute(hConsole, 15);
+	puts("Matriz carregada!!!");
 	
-	printf("digite o valor esperado da soma"); scanf("%d", &par);
+		SetConsoleTextAttribute(hConsole, 9);
+	printf("digite o valor esperado da soma: "); 
+		SetConsoleTextAttribute(hConsole, 7);
+	scanf("%d", &par);
+		SetConsoleTextAttribute(hConsole, 15);
 	puts("matriz original\n");
  	imprimirMatriz(mat,3);
- 		squareMagic(mat, 3, par);
- 		
+ 		SetConsoleTextAttribute(hConsole, 7);
+ 	squareMagic(mat, 3, par);
  	
  	
  } //fim do progama
@@ -45,6 +61,12 @@
 }
 void squareMagic(int M[][3], int ordem, int par)
 {
+		 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    GetConsoleScreenBufferInfo(hConsole, &csbi);
+    WORD cor_original = csbi.wAttributes; 
+    
     int soma = 0;
     
     for(int i = 0; i < ordem; i++){
@@ -53,7 +75,9 @@ void squareMagic(int M[][3], int ordem, int par)
             soma = M[i][j] + soma; 
         }
         if(soma != par){
-            printf("\nERRO: A soma da LINHA %d (%d) È diferente do valor esperado (%d).", i + 1, soma, par);
+        	SetConsoleTextAttribute(hConsole, 12);
+            printf("\nERRO: A soma da LINHA %d (%d) √© diferente do valor esperado (%d).", i + 1, soma, par);
+            SetConsoleTextAttribute(hConsole, 7);
             return; 
         }
     }
@@ -64,7 +88,9 @@ void squareMagic(int M[][3], int ordem, int par)
             soma += M[i][j]; // Soma a COLUNA 'j'
         }
         if(soma != par){
-            printf("\nERRO: A soma da COLUNA %d (%d) È diferente do valor esperado (%d).", j + 1, soma, par);
+        	SetConsoleTextAttribute(hConsole, 12);
+            printf("\nERRO: A soma da COLUNA %d (%d) √© diferente do valor esperado (%d).", j + 1, soma, par);
+            SetConsoleTextAttribute(hConsole, 7);
             return; 
         }
     }
@@ -74,7 +100,9 @@ void squareMagic(int M[][3], int ordem, int par)
         soma += M[i][i];
     }
     if(soma != par){
-        printf("\nERRO: A soma da DIAGONAL PRINCIPAL (%d) È diferente do valor esperado (%d).", soma, par);
+    	SetConsoleTextAttribute(hConsole, 12);
+        printf("\nERRO: A soma da DIAGONAL PRINCIPAL (%d) √© diferente do valor esperado (%d).", soma, par);
+        SetConsoleTextAttribute(hConsole, 7);
         return;
     }
 
@@ -83,12 +111,14 @@ void squareMagic(int M[][3], int ordem, int par)
         soma += M[i][ordem - 1 - i];
     }
     if(soma != par){
-        printf("\nERRO: A soma da DIAGONAL SECUND¡RIA (%d) È diferente do valor esperado (%d).", soma, par);
+    	SetConsoleTextAttribute(hConsole, 12);
+        printf("\nERRO: A soma da DIAGONAL SECUND√ÅRIA (%d) √© diferente do valor esperado (%d).", soma, par);
+        SetConsoleTextAttribute(hConsole, 7);
         return;
     }
-    
-    printf("\nA matriz … UM QUADRADO M¡GICO com soma esperada de %d.\n", par);
+    	SetConsoleTextAttribute(hConsole, 10);
+    printf("\nA matriz √â UM QUADRADO M√ÅGICO com soma esperada de %d.\n", par);
+    SetConsoleTextAttribute(hConsole, 7);
 }
  
-
 
